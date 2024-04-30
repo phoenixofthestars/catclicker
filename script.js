@@ -209,7 +209,7 @@ function sleepUpgradeBuy(){
   $(".sleepUpgrade").click(function(){
     if (numberofpets >= sleepUpgradeCost && sleepAmount >= 1){
       numberofpets -= sleepUpgradeCost;
-      sleepUpgradeCost *= 5;
+      sleepUpgradeCost *= 1.5;
       sleepPPS *= 2;
       $(".numberofpets").text("Number of pets: " + (Math.floor (numberofpets)));
       console.log("sleep upgrade bought");
@@ -261,7 +261,7 @@ function foodUpgradeBuy(){
   $(".foodUpgrade").click(function(){
     if (numberofpets >= foodUpgradeCost && foodAmount >= 1){
       numberofpets -= foodUpgradeCost;
-      foodUpgradeCost *= 5;
+      foodUpgradeCost *= 1.5;
       foodPPS *= 2;
       $(".numberofpets").text("Number of pets: " + (Math.floor (numberofpets)));
       console.log("food upgrade bought");
