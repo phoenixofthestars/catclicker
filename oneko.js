@@ -23,16 +23,18 @@
   const nekoSpeed = 10;
   const spriteSets = {
     idle: [
-      [-3, -3]
+     [0, 0]
     ],
     alert: [
-	    [-7, -3]
+	    [0, -1]
     ],
     scratchSelf: [
-      [-5, 0],
-      [-6, 0],
-      [-7, 0],
+      [-1, 0]
+			[-1, -1]
     ],
+		lickSelf: [
+			[-1, -2]
+			],
     tired: [
 			[-3, -2]
 		],
