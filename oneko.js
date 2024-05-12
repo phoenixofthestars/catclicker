@@ -22,57 +22,65 @@
 
   const nekoSpeed = 10;
   const spriteSets = {
-    idle: [
-      [0, 0]
-    ],
-    alert: [
-      [0, -1]
-    ],
+    idle: [[-3, -3]],
+    alert: [[-7, -3]],
     scratchSelf: [
-      [-1, 0],
-      [-1, -1],
+      [-5, 0],
+      [-6, 0],
+      [-7, 0],
     ],
-    lickSelf: [
-      [-1, -2]
+    scratchWallN: [
+      [0, 0],
+      [0, -1],
     ],
-    tired: [
-      [-1, -3]
+    scratchWallS: [
+      [-7, -1],
+      [-6, -2],
     ],
-    sleeping: [
-      [0, -2],
-      [0, -3],
-    ],
-    N: [
-      [-3, 0],
-      [-3, -1],
-    ],
-    NE: [
-      [-4, 0],
-      [-4, -1],
-    ],
-    E: [
-      [-2, 0],
-      [-2, -1],
-    ],
-    SE: [
-      [-4, -2],
-      [-4, -3],
-    ],
-    S: [
-      [-3, -2],
-      [-3, -3],
-    ],
-    SW: [
-      [-5, -2],
-      [-5, -3],
-    ],
-    W: [
+    scratchWallE: [
       [-2, -2],
       [-2, -3],
     ],
-    NW: [
-      [-5, 0],
+    scratchWallW: [
+      [-4, 0],
+      [-4, -1],
+    ],
+    tired: [[-3, -2]],
+    sleeping: [
+      [-2, 0],
+      [-2, -1],
+    ],
+    N: [
+      [-1, -2],
+      [-1, -3],
+    ],
+    NE: [
+      [0, -2],
+      [0, -3],
+    ],
+    E: [
+      [-3, 0],
+      [-3, -1],
+    ],
+    SE: [
       [-5, -1],
+      [-5, -2],
+    ],
+    S: [
+      [-6, -3],
+      [-7, -2],
+    ],
+    SW: [
+      [-5, -3],
+      [-6, -1],
+    ],
+    W: [
+      [-4, -2],
+      [-4, -3],
+    ],
+    NW: [
+      [-1, 0],
+      [-1, -1],
     ],
   };
 
@@ -82,13 +90,13 @@
     nekoEl.style.width = "32px";
     nekoEl.style.height = "32px";
     nekoEl.style.position = "fixed";
-    nekoEl.style.pointerEvents = "none";
+    nekoEl.style.pointerEvents = "auto";
     nekoEl.style.imageRendering = "pixelated";
     nekoEl.style.left = `${nekoPosX - 16}px`;
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = Number.MAX_VALUE;
 
-    let nekoFile = "./oneko.png";
+    let nekoFile = "./oneko.gif"
     const curScript = document.currentScript
     if (curScript && curScript.dataset.cat) {
       nekoFile = curScript.dataset.cat
@@ -141,13 +149,22 @@
       Math.floor(Math.random() * 200) == 0 &&
       idleAnimation == null
     ) {
-      let avalibleIdleAnimations = ["sleeping", "scratchSelf", "lickSelf"];
+      let avalibleIdleAnimations = ["sleeping", "scratchSelf"];
       if (nekoPosX < 32) {
-        
+        avalibleIdleAnimations.push("scratchWallW");
+      }
+      if (nekoPosY < 32) {
+        avalibleIdleAnimations.push("scratchWallN");
+      }
+      if (nekoPosX > window.innerWidth - 32) {
+        avalibleIdleAnimations.push("scratchWallE");
+      }
+      if (nekoPosY > window.innerHeight - 32) {
+        avalibleIdleAnimations.push("scratchWallS");
       }
       idleAnimation =
         avalibleIdleAnimations[
-          Math.floor(Math.random() * avalibleIdleAnimations.length)
+        Math.floor(Math.random() * avalibleIdleAnimations.length)
         ];
     }
 
@@ -162,6 +179,11 @@
           resetIdleAnimation();
         }
         break;
+      case "scratchWallN":
+      case "scratchWallS":
+      case "scratchWallE":
+      case "scratchWallW":
+      case "scratchSelf":
         setSprite(idleAnimation, idleAnimationFrame);
         if (idleAnimationFrame > 9) {
           resetIdleAnimation();
@@ -173,33 +195,34 @@
     }
     idleAnimationFrame += 1;
   }
+
   function explodeHearts() {
-	  const parent = nekoEl.parentElement;
-	  const rect = nekoEl.getBoundingClientRect();
-	  const centerX = rect.left + rect.width / 2;
-	  const centerY = rect.top + rect.height / 2;
-  
-	  for (let i = 0; i < 10; i++) {
-		const heart = document.createElement('div');
-		heart.className = 'heart';
-		heart.textContent = '❤';
-		// Add a random offset to the position
-		const offsetX = (Math.random() - 0.5) * 50;
-		const offsetY = (Math.random() - 0.5) * 50;
-		heart.style.left = `${centerX + offsetX - 16}px`;
-		heart.style.top = `${centerY + offsetY - 16}px`;
-		heart.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
-		parent.appendChild(heart);
-  
-		// Remove the heart after the animation finishes
-		setTimeout(() => {
-		  parent.removeChild(heart);
-		}, 1000);
-	  }
-	}
-  
-	const style = document.createElement('style');
-	style.innerHTML = `
+    const parent = nekoEl.parentElement;
+    const rect = nekoEl.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    for (let i = 0; i < 10; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = '❤';
+      // Add a random offset to the position
+      const offsetX = (Math.random() - 0.5) * 50;
+      const offsetY = (Math.random() - 0.5) * 50;
+      heart.style.left = `${centerX + offsetX - 16}px`;
+      heart.style.top = `${centerY + offsetY - 16}px`;
+      heart.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+      parent.appendChild(heart);
+
+      // Remove the heart after the animation finishes
+      setTimeout(() => {
+        parent.removeChild(heart);
+      }, 1000);
+    }
+  }
+
+  const style = document.createElement('style');
+  style.innerHTML = `
 		  @keyframes heartBurst {
 			  0% { transform: scale(0); opacity: 1; }
 			  100% { transform: scale(1); opacity: 0; }
@@ -212,9 +235,9 @@
 			  color: #ab9df2;
 		  }
 	  `;
-  
-	document.head.appendChild(style);
-	nekoEl.addEventListener('click', explodeHearts);
+
+  document.head.appendChild(style);
+  nekoEl.addEventListener('click', explodeHearts);
 
   function frame() {
     frameCount += 1;
