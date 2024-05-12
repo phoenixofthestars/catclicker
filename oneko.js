@@ -22,30 +22,20 @@
 
   const nekoSpeed = 10;
   const spriteSets = {
-    idle: [[-3, -3]],
-    alert: [[-7, -3]],
+    idle: [
+      [-3, -3]
+    ],
+    alert: [
+	    [-7, -3]
+    ],
     scratchSelf: [
       [-5, 0],
       [-6, 0],
       [-7, 0],
     ],
-    scratchWallN: [
-      [0, 0],
-      [0, -1],
-    ],
-    scratchWallS: [
-      [-7, -1],
-      [-6, -2],
-    ],
-    scratchWallE: [
-      [-2, -2],
-      [-2, -3],
-    ],
-    scratchWallW: [
-      [-4, 0],
-      [-4, -1],
-    ],
-    tired: [[-3, -2]],
+    tired: [
+			[-3, -2]
+		],
     sleeping: [
       [-2, 0],
       [-2, -1],
@@ -96,7 +86,7 @@
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = Number.MAX_VALUE;
 
-    let nekoFile = "./oneko.gif"
+    let nekoFile = "./oneko.png"
     const curScript = document.currentScript
     if (curScript && curScript.dataset.cat) {
       nekoFile = curScript.dataset.cat
