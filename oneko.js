@@ -179,13 +179,13 @@
 
     for (let i = 0; i < 10; i++) {
       const heart = document.createElement('heart');
-      heart.style.cssText = "
+      heart.style.cssText = `
 	position: absolute;
 	/*font-size: 2em;*/
 	animation: heartBurst 1s ease-out;
         animation-fill-mode: forwards;
 	background-image: url('images/heart.png');
-	      ";
+	      `;
       // Add a random offset to the position
       const offsetX = (Math.random() - 0.5) * 50;
       const offsetY = (Math.random() - 0.5) * 50;
