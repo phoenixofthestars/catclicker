@@ -34,45 +34,45 @@
     ],
 		lickSelf: [
 			[-1, -2]
-			],
+		],
     tired: [
 			[-3, -2]
 		],
     sleeping: [
-      [-2, 0],
-      [-2, -1],
-    ],
-    N: [
-      [-1, -2],
-      [-1, -3],
-    ],
-    NE: [
       [0, -2],
       [0, -3],
     ],
-    E: [
+    N: [
       [-3, 0],
       [-3, -1],
     ],
+    NE: [
+      [-4, 0]
+      [-4, -1],
+    ],
+    E: [
+      [-2, 0],
+      [-2, -1],
+    ],
     SE: [
-      [-5, -1],
-      [-5, -2],
-    ],
-    S: [
-      [-6, -3],
-      [-7, -2],
-    ],
-    SW: [
-      [-5, -3],
-      [-6, -1],
-    ],
-    W: [
       [-4, -2],
       [-4, -3],
     ],
+    S: [
+      [-3, -2],
+      [-3, -3],
+    ],
+    SW: [
+      [-5, -2],
+      [-5, -3],
+    ],
+    W: [
+      [-2, -2],
+      [-2, -3],
+    ],
     NW: [
-      [-1, 0],
-      [-1, -1],
+      [-5, 0],
+      [-5, -1],
     ],
   };
 
@@ -141,19 +141,7 @@
       Math.floor(Math.random() * 200) == 0 &&
       idleAnimation == null
     ) {
-      let avalibleIdleAnimations = ["sleeping", "scratchSelf"];
-      if (nekoPosX < 32) {
-        avalibleIdleAnimations.push("scratchWallW");
-      }
-      if (nekoPosY < 32) {
-        avalibleIdleAnimations.push("scratchWallN");
-      }
-      if (nekoPosX > window.innerWidth - 32) {
-        avalibleIdleAnimations.push("scratchWallE");
-      }
-      if (nekoPosY > window.innerHeight - 32) {
-        avalibleIdleAnimations.push("scratchWallS");
-      }
+      let avalibleIdleAnimations = ["sleeping", "scratchSelf", "lickSelf"];
       idleAnimation =
         avalibleIdleAnimations[
         Math.floor(Math.random() * avalibleIdleAnimations.length)
@@ -171,11 +159,6 @@
           resetIdleAnimation();
         }
         break;
-      case "scratchWallN":
-      case "scratchWallS":
-      case "scratchWallE":
-      case "scratchWallW":
-      case "scratchSelf":
         setSprite(idleAnimation, idleAnimationFrame);
         if (idleAnimationFrame > 9) {
           resetIdleAnimation();
@@ -197,7 +180,7 @@
     for (let i = 0; i < 10; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
-      heart.textContent = '❤';
+      heart.textContent = '💜';
       // Add a random offset to the position
       const offsetX = (Math.random() - 0.5) * 50;
       const offsetY = (Math.random() - 0.5) * 50;
