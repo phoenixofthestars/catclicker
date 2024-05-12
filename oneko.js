@@ -178,8 +178,14 @@
     const centerY = rect.top + rect.height / 2;
 
     for (let i = 0; i < 10; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
+      const heart = document.createElement('heart');
+      heart.style.cssText = "
+	position: absolute;
+	/*font-size: 2em;*/
+	animation: heartBurst 1s ease-out;
+        animation-fill-mode: forwards;
+	background-image: url('images/heart.png');
+	      ";
       // Add a random offset to the position
       const offsetX = (Math.random() - 0.5) * 50;
       const offsetY = (Math.random() - 0.5) * 50;
@@ -195,7 +201,7 @@
     }
   }
 
-  const style = document.createElement('style');
+  /*const style = document.createElement('style');
   style.innerHTML = `
 		  @keyframes heartBurst {
 			  0% { transform: scale(0); opacity: 1; }
@@ -210,7 +216,7 @@
 		  }
 	  `;
 
-  document.head.appendChild(style);
+  document.head.appendChild(style);*/
   nekoEl.addEventListener('click', explodeHearts);
 
   function frame() {
