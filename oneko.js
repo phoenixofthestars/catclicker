@@ -55,8 +55,8 @@
       [-2, -1],
     ],
     SE: [
+      [-4, -2],
       [-4, -3],
-      [-4, -4],
     ],
     S: [
       [-3, -2],
@@ -88,7 +88,7 @@
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = Number.MAX_VALUE;
 
-    let nekoFile = "./oneko.png"
+    let nekoFile = "images/oneko.png"
     const curScript = document.currentScript
     if (curScript && curScript.dataset.cat) {
       nekoFile = curScript.dataset.cat
