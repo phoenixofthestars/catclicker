@@ -88,7 +88,7 @@
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = Number.MAX_VALUE;
 
-    let nekoFile = "images/oneko.png"
+    let nekoFile = " ./images/oneko.png"
     const curScript = document.currentScript
     if (curScript && curScript.dataset.cat) {
       nekoFile = curScript.dataset.cat
@@ -171,7 +171,7 @@
     idleAnimationFrame += 1;
   }
 
-  function explodeHearts() {
+ /* function explodeHearts() {
     const parent = nekoEl.parentElement;
     const rect = nekoEl.getBoundingClientRect();
     const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
@@ -182,7 +182,7 @@
     for (let i = 0; i < 10; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
-      heart.textContent = '❤';
+      heart.textContent = '💜';
       const offsetX = (Math.random() - 0.5) * 50;
       const offsetY = (Math.random() - 0.5) * 50;
       heart.style.left = `${centerX + offsetX - 16}px`;
@@ -212,7 +212,7 @@
 	  `;
 
   document.head.appendChild(style);
-  nekoEl.addEventListener('click', explodeHearts);
+  nekoEl.addEventListener('click', explodeHearts); */
 
 
   function frame() {
