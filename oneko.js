@@ -22,65 +22,57 @@
 
   const nekoSpeed = 10;
   const spriteSets = {
-    idle: [[-3, -3]],
-    alert: [[-7, -3]],
+    idle: [
+      [0, 0]
+    ],
+    alert: [
+      [0, -1]
+    ],
     scratchSelf: [
-      [-5, 0],
-      [-6, 0],
-      [-7, 0],
+      [-1, 0]
+      [-1, -1]
     ],
-    scratchWallN: [
-      [0, 0],
-      [0, -1],
+    lickSelf: [
+      [-1, -2]
     ],
-    scratchWallS: [
-      [-7, -1],
-      [-6, -2],
+    tired: [
+      [-3, -2]
     ],
-    scratchWallE: [
-      [-2, -2],
-      [-2, -3],
-    ],
-    scratchWallW: [
-      [-4, 0],
-      [-4, -1],
-    ],
-    tired: [[-3, -2]],
     sleeping: [
-      [-2, 0],
-      [-2, -1],
-    ],
-    N: [
-      [-1, -2],
-      [-1, -3],
-    ],
-    NE: [
       [0, -2],
       [0, -3],
     ],
-    E: [
+    N: [
       [-3, 0],
       [-3, -1],
     ],
+    NE: [
+      [-4, 0]
+      [-4, -1],
+    ],
+    E: [
+      [-2, 0],
+      [-2, -1],
+    ],
     SE: [
-      [-5, -1],
-      [-5, -2],
-    ],
-    S: [
-      [-6, -3],
-      [-7, -2],
-    ],
-    SW: [
-      [-5, -3],
-      [-6, -1],
-    ],
-    W: [
       [-4, -2],
       [-4, -3],
     ],
+    S: [
+      [-3, -2],
+      [-3, -3],
+    ],
+    SW: [
+      [-5, -2],
+      [-5, -3],
+    ],
+    W: [
+      [-2, -2],
+      [-2, -3],
+    ],
     NW: [
-      [-1, 0],
-      [-1, -1],
+      [-5, 0],
+      [-5, -1],
     ],
   };
 
@@ -96,7 +88,7 @@
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = Number.MAX_VALUE;
 
-    let nekoFile = "./oneko.gif"
+    let nekoFile = "./oneko.png"
     const curScript = document.currentScript
     if (curScript && curScript.dataset.cat) {
       nekoFile = curScript.dataset.cat
@@ -150,18 +142,6 @@
       idleAnimation == null
     ) {
       let avalibleIdleAnimations = ["sleeping", "scratchSelf"];
-      if (nekoPosX < 32) {
-        avalibleIdleAnimations.push("scratchWallW");
-      }
-      if (nekoPosY < 32) {
-        avalibleIdleAnimations.push("scratchWallN");
-      }
-      if (nekoPosX > window.innerWidth - 32) {
-        avalibleIdleAnimations.push("scratchWallE");
-      }
-      if (nekoPosY > window.innerHeight - 32) {
-        avalibleIdleAnimations.push("scratchWallS");
-      }
       idleAnimation =
         avalibleIdleAnimations[
         Math.floor(Math.random() * avalibleIdleAnimations.length)
@@ -179,11 +159,6 @@
           resetIdleAnimation();
         }
         break;
-      case "scratchWallN":
-      case "scratchWallS":
-      case "scratchWallE":
-      case "scratchWallW":
-      case "scratchSelf":
         setSprite(idleAnimation, idleAnimationFrame);
         if (idleAnimationFrame > 9) {
           resetIdleAnimation();
@@ -207,7 +182,7 @@
     for (let i = 0; i < 10; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
-      heart.textContent = '❤';
+      heart.textContent = '💜';
       const offsetX = (Math.random() - 0.5) * 50;
       const offsetY = (Math.random() - 0.5) * 50;
       heart.style.left = `${centerX + offsetX - 16}px`;
